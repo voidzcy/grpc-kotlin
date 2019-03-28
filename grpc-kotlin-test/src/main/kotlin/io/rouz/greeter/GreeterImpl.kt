@@ -47,7 +47,7 @@ class GreeterImpl : GreeterImplBase(
             .build()
     }
 
-    override fun greetServerStream(request: GreetRequest) = produce<GreetReply> {
+    override suspend fun greetServerStream(request: GreetRequest) = produce<GreetReply> {
         log.info(request.greeting)
 
         send(
@@ -75,7 +75,7 @@ class GreeterImpl : GreeterImplBase(
             .build()
     }
 
-    override fun greetBidirectional(requests: ReceiveChannel<GreetRequest>) = produce<GreetReply> {
+    override suspend fun greetBidirectional(requests: ReceiveChannel<GreetRequest>) = produce<GreetReply> {
         var count = 0
 
         for (request in requests) {
